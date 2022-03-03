@@ -21,6 +21,7 @@ namespace DownLoadFileGraph
             try
             {
                 IConfidentialClientApplication app;
+                // replace client id sectet and tanent id. 
                 app = ConfidentialClientApplicationBuilder.Create("7ab4d0d7-72af-4716-b469-e2995f62132f")
                                                           .WithClientSecret("KpW7Q~deOkZhNYSygx4tEa~FkH-lBLDOOReSj")
                                                           .WithAuthority(new Uri("https://login.microsoftonline.com/52ff68c1-439b-4bba-81a4-15c9eab6adc7/oauth2/v2.0/authorize"))
@@ -31,6 +32,7 @@ namespace DownLoadFileGraph
 
                 string accesstoken = result.AccessToken;
 
+// replace the name of the library. 
                 string httpRequestURL = "https://graph.microsoft.com/v1.0/sites/sohodragonlabs.sharepoint.com:/sites/PicLibTest";
                 string siteId = string.Empty;
                 SiteDetails site = new SiteDetails();
@@ -65,6 +67,7 @@ namespace DownLoadFileGraph
 
                 foreach (var drive in drives.CurrentPage)
                 {
+                    // get the id based on the name of the library. 
                     if (drive.Name == "PictureLibrary")
                     {
                         driveID = drive.Id;
@@ -72,7 +75,7 @@ namespace DownLoadFileGraph
                 }
 
                 Console.WriteLine(driveID);
-
+// pass the path of the file. 
                 string httpRequestURL1 = "https://graph.microsoft.com/v1.0/sites/" + siteId + "/drives/" + driveID + "/root:/test.jpg";
                 string downloadURL = string.Empty;
                 DownloadURL fileInfo = new DownloadURL();
